@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanfeng.dao.extend.HouseInfoCrawlExtendMapper">
+
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into t_house_info_crawl(oid,name,mobile,ban,roomNumber,floor,salePrice,createDate,areaName,memberName,areaSize,community,status,checkContent)
+    values
+    <foreach collection="list" item="item" index="index"
+             separator=",">
+      ( #{item.oid}, #{item.name}, #{item.mobile}, #{item.ban},
+      #{item.roomnumber}, #{item.floor},
+      #{item.saleprice}, #{item.createdate},
+      #{item.areaname}, #{item.membername},
+      #{item.areasize}, #{item.community}, #{item.status},
+      #{item.checkcontent} )
+    </foreach>
+  </insert>
+
+  <!--<insert id="batchInsert" parameterType="java.util.List">-->
+    <!--insert into t_house_info_crawl(name,mobile,ban,roomNumber,floor,salePrice)-->
+    <!--values-->
+    <!--<foreach collection="list" item="item" index="index"-->
+             <!--separator=",">-->
+      <!--( #{item.name},#{item.mobile}, #{item.ban},-->
+      <!--#{item.roomnumber}, #{item.floor},-->
+      <!--#{item.saleprice}-->
+       <!--)-->
+    <!--</foreach>-->
+  <!--</insert>-->
+</mapper>

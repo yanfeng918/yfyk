@@ -1,7 +1,6 @@
 package com.yanfeng;
 
-import com.yanfeng.dao.StudentMapper;
-import com.yanfeng.dao.UserMapper;
+
 import com.yanfeng.entity.Student;
 import com.yanfeng.entity.StudentExample;
 import com.yanfeng.entity.User;
@@ -26,8 +25,8 @@ public class UserTest {
 ////    @Resource
 //    private UserMapper userMapper;
 
-    @Resource
-    private StudentMapper studentMapper;
+//    @Resource
+//    private StudentMapper studentMapper;
 
     @Test
     public void getNearbyNum()  {
@@ -36,17 +35,12 @@ public class UserTest {
 //        System.out.print(load.toString());
     }
 
-    @Test
-    public void addStudent()  {
-        Student s = new Student();
-        s.setName("yanfeng");
-        studentMapper.insert(s);
-    }
 
-    @Test
-    public void test1(){
-        StudentExample example = new StudentExample();
-        example.or().andNameLike("%yan%");
-        System.out.print(studentMapper.selectByExample(example).get(0).toString());
-    }
+
+//    @Test
+//    public void test1(){
+//        StudentExample example = new StudentExample();
+//        example.or().andNameLike("%yan%");
+//        System.out.print(studentMapper.selectByExample(example).get(0).toString());
+//    }
 }

@@ -1,6 +1,7 @@
 package com.yanfeng.controller;
 
-import com.yanfeng.dao.UserMapper;
+import com.yanfeng.dao.mbg.HouseInfoCrawlMapper;
+import com.yanfeng.entity.HouseInfoCrawl;
 import com.yanfeng.entity.StudentExample;
 import com.yanfeng.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,15 @@ import javax.annotation.Resource;
 public class IndexController {
     
     @Autowired(required = true)
-//    @Qualifier("userMapper")
-//    @Resource
-    private UserMapper userMapper;
-
-    public UserMapper getUserMapper() {
-        return userMapper;
-    }
-
-    public void setUserMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    private HouseInfoCrawlMapper houseInfoCrawlMapper;
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public String test(){
-        User load = userMapper.load(1);
-        System.out.print(load.toString());
+        HouseInfoCrawl house = new HouseInfoCrawl();
+
+        house.setAddress("123");
+        houseInfoCrawlMapper.insertSelective(house);
         return "yanfeng";
     }
 

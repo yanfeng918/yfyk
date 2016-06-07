@@ -20,7 +20,7 @@ public class DagongpanProcessor implements PageProcessor {
             .setDomain("dagongpan.cn")
             .setSleepTime(1000)
             .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
-            .addCookie("dagongpan.cn","JSESSIONID","06D1CC7E457EB9872FD67F673BE1EC21-n2");
+            .addCookie("dagongpan.cn","JSESSIONID","570D61DBD1FAF075C2D0BF1B763A0C0B-n2");
 
     @Override
     public void process(Page page) {
@@ -30,7 +30,7 @@ public class DagongpanProcessor implements PageProcessor {
             //首先加入目标请求
 //            System.out.println(html);
             List<String> all = page.getHtml().xpath("//table[@class='list']//td").links().regex(URL_LIST).all();
-            page.addTargetRequests(page.getHtml().xpath("//table[@class='list']//td").links().regex(URL_LIST).all());
+            page.addTargetRequests(all);
 //            page.addTargetRequests(page.getHtml().links().regex(URL_LIST).all());
             //文章页
 
