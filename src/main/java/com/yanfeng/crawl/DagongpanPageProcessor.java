@@ -36,7 +36,7 @@ public class DagongpanPageProcessor implements PageProcessor {
             .setSleepTime(3000)
             .setUserAgent(
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
-            .addCookie("dagongpan.cn","JSESSIONID","24DC15843A74E58C54BEEE24CD68E7E5-n2");
+            .addCookie("dagongpan.cn","JSESSIONID","FE42552B737C903454E46A83220D752F-n1");
 
     @Override
     public void process(Page page) {
@@ -75,7 +75,7 @@ public class DagongpanPageProcessor implements PageProcessor {
 
                 list.add(houseInfoCrawl);
 
-                System.out.println(houseInfoCrawl.toString());
+//                System.out.println(houseInfoCrawl.toString());
             }
 
         }

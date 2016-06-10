@@ -4,14 +4,14 @@
 
 
   <insert id="batchInsert" parameterType="java.util.List">
-    insert into t_house_info_crawl(oid,name,mobile,ban,roomNumber,floor,salePrice,createDate,areaName,memberName,areaSize,community,status,checkContent)
+    insert into t_house_info_crawl(oid,name,mobile,ban,roomNumber,floor,salePrice,createDate,areaName,area_id,memberName,areaSize,community,status,checkContent)
     values
     <foreach collection="list" item="item" index="index"
              separator=",">
       ( #{item.oid}, #{item.name}, #{item.mobile}, #{item.ban},
       #{item.roomnumber}, #{item.floor},
       #{item.saleprice}, #{item.createdate},
-      #{item.areaname}, #{item.membername},
+      #{item.areaname},#{item.areaId},  #{item.membername},
       #{item.areasize}, #{item.community}, #{item.status},
       #{item.checkcontent} )
     </foreach>

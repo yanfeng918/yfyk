@@ -1,25 +1,26 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50546
-Source Host           : localhost:3306
-Source Database       : yfyk
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50624
+ Source Host           : localhost
+ Source Database       : yfyk
 
-Target Server Type    : MYSQL
-Target Server Version : 50546
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 50624
+ File Encoding         : utf-8
 
-Date: 2016-06-07 18:17:47
+ Date: 06/10/2016 15:52:48 PM
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for t_house_info_crawl
+--  Table structure for `t_house_info_crawl`
 -- ----------------------------
-DROP TABLE IF EXISTS `t_house_info_crawl`;
-CREATE TABLE `t_house_info_crawl` (
+CREATE TABLE `t_house_info_ef` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `oid` int(11) DEFAULT NULL,
   `createDate` datetime DEFAULT NULL,
@@ -56,4 +57,6 @@ CREATE TABLE `t_house_info_crawl` (
   KEY `FK33FB0F18B2200574` (`member_id`),
   KEY `FK33FB0F184F27C0E5` (`area_id`),
   KEY `index_mobile` (`mobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=319 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SET FOREIGN_KEY_CHECKS = 1;
