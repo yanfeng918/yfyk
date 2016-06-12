@@ -28,20 +28,22 @@ public class DagongpanPageProcessor implements PageProcessor {
 
     private static List<HouseInfoCrawl> list = new ArrayList<HouseInfoCrawl>();
 
-    public static final String URL_LISTSH = "http://dagongpan\\.cn/yjbadmin/auth/houseInfo/list\\?&areaId=792&areaId_select=792&pageSize=100&orderBy=createDate&orderType=desc&pageNumber=(\\d*)?";
+    public static final String URL_LISTSH = "http://dagongpan\\.cn/yjbadmin/auth/houseInfo/list\\?&areaId=792&areaId_select=792&pageSize=100&orderBy=createDate&orderType=desc&pageNumber=(\\d\\*)";
 
     private Site site = Site
             .me()
             .setDomain("dagongpan.cn")
-            .setSleepTime(3000)
-            .setUserAgent(
-                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
-            .addCookie("dagongpan.cn","JSESSIONID","FE42552B737C903454E46A83220D752F-n1");
+            .setTimeOut(35000)
+            .setSleepTime(100)
+            .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
+            .addCookie("dagongpan.cn","JSESSIONID","74B04925BA16BBB2F34F29D54FED7349-n1");
 
     @Override
     public void process(Page page) {
         //列表页
         if (page.getUrl().regex(URL_LISTSH).match()) {
+//            System.out.println(2222);
+        }
 
             List<String> all = page.getHtml().xpath("//table[@id='listTable']//tr").all();
 
@@ -71,14 +73,18 @@ public class DagongpanPageProcessor implements PageProcessor {
                 houseInfoCrawl.setMobile(td.get(11).html());
 
                 houseInfoCrawl.setCheckcontent(td.get(13).html());
-                houseInfoCrawl.setStatus(td.get(14).child(0).text());
+                try {
+                    houseInfoCrawl.setStatus(td.get(14).child(0).text());
+                }catch (Exception e){
+                    houseInfoCrawl.setStatus("失败-房源失效");
+                }
+
 
                 list.add(houseInfoCrawl);
 
-//                System.out.println(houseInfoCrawl.toString());
+                System.out.println(houseInfoCrawl.toString());
             }
 
-        }
     }
 
     @Override

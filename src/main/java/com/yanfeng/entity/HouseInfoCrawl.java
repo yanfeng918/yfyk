@@ -962,4 +962,41 @@ public class HouseInfoCrawl {
     public void setAreaname(String areaname) {
         this.areaname = areaname == null ? null : areaname.trim();
     }
+
+
+    @Override
+    public String toString() {
+        return "HouseInfoCrawl{" +
+                "id=" + id +
+                ", oid=" + oid +
+                ", createdate=" + createdate +
+                ", modifydate=" + modifydate +
+                ", name='" + name + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", phone='" + phone + '\'' +
+                ", community='" + community + '\'' +
+                ", areasize=" + areasize +
+                ", ban='" + ban + '\'' +
+                ", floor='" + floor + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", infoprice=" + infoprice +
+                ", readtime=" + readtime +
+                ", roomnumber='" + roomnumber + '\'' +
+                ", saleprice=" + saleprice +
+                ", saleway='" + saleway + '\'' +
+                ", status='" + status + '\'' +
+                ", areaId=" + areaId +
+                ", memberId=" + memberId +
+                ", available=" + available +
+                ", houseshape='" + houseshape + '\'' +
+                ", priority=" + priority +
+                ", checkdate=" + checkdate +
+                ", checkcontent='" + checkcontent + '\'' +
+                ", operateId=" + operateId +
+                ", ischannel=" + ischannel +
+                ", membername='" + membername + '\'' +
+                ", areaname='" + areaname + '\'' +
+                '}';
+    }
 }

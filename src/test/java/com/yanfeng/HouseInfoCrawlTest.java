@@ -47,21 +47,33 @@ public class HouseInfoCrawlTest {
         List<HouseInfoCrawl> list = null;
 
         String baseUrl="http://dagongpan.cn/yjbadmin/auth/houseInfo/list?&areaId=792&areaId_select=792&pageSize=100&orderBy=createDate&orderType=desc&pageNumber=";
-        for (int i=1;i<=totalPager;i++){
-            list = dagongpanPageProcessor.begin(baseUrl+i);
-            //过滤数据 已存在的数据
-            List<HouseInfoCrawl> filterList = filter(list);
-            //处理数据的区域名称到区域id
-            List<HouseInfoCrawl> newHouseList = changeToAreaId(filterList);
+        for (int i=6133;i>=totalPager;i--){
 
-            //保存数据
-            if (newHouseList!=null&&newHouseList.size()!=0){
-                //保存有效数据到有效房源
-                houseInfoValidMapper.batchInsert(filterValid(newHouseList));
-                //保存其它类型的房源到爬虫数据
-                houseInfoCrawlMapper.batchInsert(filterInValid(newHouseList));
+            try {
+                System.out.println("pageNumber:"+baseUrl+i);
+                list = dagongpanPageProcessor.begin(baseUrl+i);
+                //过滤数据 已存在的数据
+                List<HouseInfoCrawl> filterList = filter(list);
+                //处理数据的区域名称到区域id
+                List<HouseInfoCrawl> newHouseList = changeToAreaId(filterList);
+
+                //保存数据
+                if (newHouseList!=null&&newHouseList.size()!=0){
+                    //保存有效数据到有效房源
+                    List<HouseInfoCrawl> list1 = filterValid(newHouseList);
+                    if(list1!=null&&list1.size()>0)
+                        houseInfoValidMapper.batchInsert(list1);
+                    //保存其它类型的房源到爬虫数据
+                    List<HouseInfoCrawl> list2 = filterInValid(newHouseList);
+                    if(list2!=null&&list2.size()>0)
+                        houseInfoCrawlMapper.batchInsert(list2);
+                }
+                dagongpanPageProcessor.clearList();
+                //Thread.sleep(1000L);
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            dagongpanPageProcessor.clearList();
         }
         System.out.print(list.size());
 
@@ -129,14 +141,24 @@ public class HouseInfoCrawlTest {
             String areaname = house.getAreaname();
             //获取前2个字符串
             String city = areaname.substring(0,2);
-            String district = areaname.substring(2,4);
-            String left = areaname.substring(4);
+            String district = "";
+            String left = "";
+            try {
+                left = areaname.substring(4);
+                district = areaname.substring(2,4);
+            }catch (Exception e){}
             if(district.equals("浦东")){
                 String newArea = "上海市浦东新区"+left;
                 house.setAreaname(newArea);
             }else{
-                String newArea = city+"市"+district+"区"+left;
-                house.setAreaname(newArea);
+                if(district.equals("")){
+                    String newArea = city+"市";
+                    house.setAreaname(newArea);
+                }else{
+                    String newArea = city+"市"+district+"区"+left;
+                    house.setAreaname(newArea);
+                }
+
             }
             //根据区域名称查询区域对应的id
 
